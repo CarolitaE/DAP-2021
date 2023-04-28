@@ -7,7 +7,7 @@ site: bookdown::bookdown_site
 
 # Dryland Agroecosystems Project 
 
-## Welcome to the Dryland Agroecosystem bookdown for my master thesis.
+Welcome to the Dryland Agroecosystem bookdown for my master thesis.
 
 The Dryland Agroecosystems project was born in 1985 in collaboration with Colorado State University, the USDA-ARS and local Eastern Colorado dryland farmers. This long term experiment was set up in order to research how cropping intensity can improve the vulnerability of Great Plains dryland agroecosystems. The transition to no-till farming has allowed for more diverse and intensive cropping rotations that improve water use efficiency. No-till management along with increased cropping system intensity has shown gains in surface soil organic C (SOC). The plots are situated along an evapotranspiration gradient. and positioned on a gradient of slight slope positions all corresponding to a unique soil series of the area.
 
@@ -17,11 +17,11 @@ Each chapter of this bookdown will contain the data, r code, visual plots and mo
 
 Note: Inorganic carbon values are still being analyzed and will be incomplete in this data set
 
-### Experimental Design
+ Experimental Design
 
 ![DAP original sequence design](images/DAP%20sequence.png)
 
-#### 2021 Sampling Design
+2021 Sampling Design
 
 -   3 sites where Sterling =1, Stratton =2 and Walsh =3
 
