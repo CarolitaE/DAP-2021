@@ -1,0 +1,50 @@
+---
+title: "Data Visualization"
+author: "Carolita Landers"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+description: "This is an example of using the bookdown package. The output format for this example is bookdown::gitbook."
+---
+
+#Data Visualization
+
+```{r}
+library(bookdown)
+library(tidyverse)
+library(plotly)
+library(ggplot2)
+library(ggplotgui)
+library(readxl)
+library(dplyr)
+library(tidyr)
+```
+
+## Plotting TN across all sites, slope and rotation
+
+```{r}
+graph_TN_all_sites<- ggplot(DAP_tidy, aes(x = Depth, y = TNperha, colour = SLOPE)) +
+  geom_point() +
+  facet_grid( . ~ Rotation ) +
+  labs(x = 'Depth (cm) ', y = 'TN tons/ha') +
+  ggtitle('TN across all sites ') +
+  theme_bw()
+graph_TN_all_sites
+```
+
+![](images/image-2005288338.png)
+
+## Plotting TC across all sites, slope and rotation
+
+```{r}
+graph_TC_all_sites<- ggplot(DAP_tidy, aes(x = Depth, y = TCperha, colour = SLOPE)) +
+  geom_point() +
+  facet_grid( . ~ Rotation ) +labs(x = 'Depth (cm) ', y = 'TC tons/ha') +
+  ggtitle('TC across all sites ') +
+  theme_bw()
+graph_TC_all_sites
+
+```
+
+![](images/image-586511912.png)
