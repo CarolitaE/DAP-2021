@@ -1,15 +1,31 @@
----
-title: "Data Visualization"
-author: "Carolita Landers"
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
-output: bookdown::gitbook
-documentclass: book
-description: "This is an example of using the bookdown package. The output format for this example is bookdown::gitbook."
----
+#Tidying and calcs
 
-#Data Visualization
+###Tidying 
 
+```{r}
+DAP_tidy <- DAP_ALL_RAW %>%
+  rename(ID = `unique ID`,
+         BD = `Bulk Density g/cm^3`,
+         TC = `LECO carbon`,
+         TN = `LECO  Nitrogen`,
+         Depth = EndDepth) %>%
+  select(ID, SITE, SLOPE, STRIP, Rotation, Depth, BD,TN, TC) %>%
+  mutate(across(c(SITE, SLOPE, STRIP), as.numeric))
+
+```
+
+```{r}
+
+ 
+```
+
+###Data Calculations
+```{r}
+DAP_tidy$TNperha<-  with(DAP_tidy, TN * BD * Depth * 100)
+DAP_tidy$TCperha<- with(DAP_tidy, TC * BD * Depth *100)
+```
+
+#Visualizing 
 ```{r}
 library(bookdown)
 library(tidyverse)
@@ -21,7 +37,7 @@ library(dplyr)
 library(tidyr)
 ```
 
-## Plotting TN across all sites, slope and rotation
+### Plotting TN across all sites, slope and rotation
 
 ```{r}
 graph_TN_all_sites<- ggplot(DAP_tidy, aes(x = Depth, y = TNperha, colour = SLOPE)) +
@@ -35,7 +51,7 @@ graph_TN_all_sites
 
 ![](images/image-2005288338.png)
 
-## Plotting TC across all sites, slope and rotation
+### Plotting TC across all sites, slope and rotation
 
 ```{r}
 graph_TC_all_sites<- ggplot(DAP_tidy, aes(x = Depth, y = TCperha, colour = SLOPE)) +
@@ -48,3 +64,4 @@ graph_TC_all_sites
 ```
 
 ![](images/image-586511912.png)
+

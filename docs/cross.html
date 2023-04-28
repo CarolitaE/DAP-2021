@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 A caucus-race and a long tale | DAP 2021</title>
-  <meta name="description" content="Chapter 5 A caucus-race and a long tale | DAP 2021" />
+  <title>Chapter 2 Raw Data &amp; Methods 2021 | DAP 2021</title>
+  <meta name="description" content="Chapter 2 Raw Data &amp; Methods 2021 | DAP 2021" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 A caucus-race and a long tale | DAP 2021" />
+  <meta property="og:title" content="Chapter 2 Raw Data &amp; Methods 2021 | DAP 2021" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 A caucus-race and a long tale | DAP 2021" />
+  <meta name="twitter:title" content="Chapter 2 Raw Data &amp; Methods 2021 | DAP 2021" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="data-tidying-calculations.html"/>
-<link rel="next" href="statistical-analysis.html"/>
+<link rel="prev" href="index.html"/>
+<link rel="next" href="the-pool-of-tears.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -183,42 +183,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="a-caucus-race-and-a-long-tale" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">Chapter 5</span> A caucus-race and a long tale<a href="a-caucus-race-and-a-long-tale.html#a-caucus-race-and-a-long-tale" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-
-<p>#Data Visualization</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="a-caucus-race-and-a-long-tale.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bookdown)</span>
-<span id="cb10-2"><a href="a-caucus-race-and-a-long-tale.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb10-3"><a href="a-caucus-race-and-a-long-tale.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb10-4"><a href="a-caucus-race-and-a-long-tale.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb10-5"><a href="a-caucus-race-and-a-long-tale.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplotgui)</span>
-<span id="cb10-6"><a href="a-caucus-race-and-a-long-tale.html#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb10-7"><a href="a-caucus-race-and-a-long-tale.html#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb10-8"><a href="a-caucus-race-and-a-long-tale.html#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code></pre></div>
-<div id="plotting-tn-across-all-sites-slope-and-rotation" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Plotting TN across all sites, slope and rotation<a href="a-caucus-race-and-a-long-tale.html#plotting-tn-across-all-sites-slope-and-rotation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="a-caucus-race-and-a-long-tale.html#cb11-1" aria-hidden="true" tabindex="-1"></a>graph_TN_all_sites<span class="ot">&lt;-</span> <span class="fu">ggplot</span>(DAP_tidy, <span class="fu">aes</span>(<span class="at">x =</span> Depth, <span class="at">y =</span> TNperha, <span class="at">colour =</span> SLOPE)) <span class="sc">+</span></span>
-<span id="cb11-2"><a href="a-caucus-race-and-a-long-tale.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb11-3"><a href="a-caucus-race-and-a-long-tale.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>( . <span class="sc">~</span> Rotation ) <span class="sc">+</span></span>
-<span id="cb11-4"><a href="a-caucus-race-and-a-long-tale.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Depth (cm) &#39;</span>, <span class="at">y =</span> <span class="st">&#39;TN tons/ha&#39;</span>) <span class="sc">+</span></span>
-<span id="cb11-5"><a href="a-caucus-race-and-a-long-tale.html#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&#39;TN across all sites &#39;</span>) <span class="sc">+</span></span>
-<span id="cb11-6"><a href="a-caucus-race-and-a-long-tale.html#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb11-7"><a href="a-caucus-race-and-a-long-tale.html#cb11-7" aria-hidden="true" tabindex="-1"></a>graph_TN_all_sites</span></code></pre></div>
-<pre><code>## Warning: Removed 283 rows containing missing values (`geom_point()`).</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p><img src="images/image-2005288338.png" /></p>
+<div id="cross" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Raw Data &amp; Methods 2021<a href="cross.html#cross" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="bulk-density" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Bulk Density<a href="cross.html#bulk-density" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Bulk density was sampled in field using standard 5cm bulk density rings for the 0-5cm and 5-10 cm depths. A madera soil sampling probe (Madera industrial Inc. Lincoln,NE) was used to measure the 10-20cm depths. The giddings probe volume was used to calculate BD for the 20-80cm depths.</p>
 </div>
-<div id="plotting-tc-across-all-sites-slope-and-rotation" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Plotting TC across all sites, slope and rotation<a href="a-caucus-race-and-a-long-tale.html#plotting-tc-across-all-sites-slope-and-rotation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="a-caucus-race-and-a-long-tale.html#cb13-1" aria-hidden="true" tabindex="-1"></a>graph_TC_all_sites<span class="ot">&lt;-</span> <span class="fu">ggplot</span>(DAP_tidy, <span class="fu">aes</span>(<span class="at">x =</span> Depth, <span class="at">y =</span> TCperha, <span class="at">colour =</span> SLOPE)) <span class="sc">+</span></span>
-<span id="cb13-2"><a href="a-caucus-race-and-a-long-tale.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb13-3"><a href="a-caucus-race-and-a-long-tale.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>( . <span class="sc">~</span> Rotation ) <span class="sc">+</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Depth (cm) &#39;</span>, <span class="at">y =</span> <span class="st">&#39;TC tons/ha&#39;</span>) <span class="sc">+</span></span>
-<span id="cb13-4"><a href="a-caucus-race-and-a-long-tale.html#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&#39;TC across all sites &#39;</span>) <span class="sc">+</span></span>
-<span id="cb13-5"><a href="a-caucus-race-and-a-long-tale.html#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb13-6"><a href="a-caucus-race-and-a-long-tale.html#cb13-6" aria-hidden="true" tabindex="-1"></a>graph_TC_all_sites</span></code></pre></div>
-<pre><code>## Warning: Removed 283 rows containing missing values (`geom_point()`).</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<p><img src="images/image-586511912.png" /></p>
+<div id="total-carbon-and-nitrogen" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Total Carbon and Nitrogen<a href="cross.html#total-carbon-and-nitrogen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Total carbon (TC) and total Nitrogen (TN) were analyzed using LECO at the USDA ARS laboratory located in Fort Collins CO. Samples were loaded into ceramic boats with a specific samples mass, loaded into the LECO, and their % Carbon and % Nitrogen values are applied to the sample mass.</li>
+<li>Total C and N values have to then be applied to BD in order to get %Nitrogen T/ha. Using the following calculation
+<ul>
+<li>%N/g X BD X Depth X 100 (unit conversion factor)</li>
+</ul></li>
+</ul>
+</div>
+<div id="inorganic-carbon" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Inorganic Carbon<a href="cross.html#inorganic-carbon" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Inorganic carbon is analyzed using the pressure calcimeter method created by Sherrod et al. This methodology measure %Calcium carbonate that you can further calculate to get %inorganic Carbon</p>
+<p>%IC will be subtracted from %TC in order to get %OC</p>
+</div>
+<div id="load-raw-data" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Load Raw Data<a href="cross.html#load-raw-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="cross.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<pre><code>## ── Attaching packages ─────────────────────────────────────────────────────────── tidyverse 1.3.2 ──
+## ✔ ggplot2 3.4.0      ✔ purrr   1.0.1 
+## ✔ tibble  3.1.8      ✔ dplyr   1.0.10
+## ✔ tidyr   1.2.1      ✔ stringr 1.5.0 
+## ✔ readr   2.1.3      ✔ forcats 0.5.2 
+## ── Conflicts ────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="cross.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;plotly&#39;
+## 
+## The following object is masked from &#39;package:ggplot2&#39;:
+## 
+##     last_plot
+## 
+## The following object is masked from &#39;package:stats&#39;:
+## 
+##     filter
+## 
+## The following object is masked from &#39;package:graphics&#39;:
+## 
+##     layout</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="cross.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-2"><a href="cross.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplotgui)</span>
+<span id="cb5-3"><a href="cross.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb5-4"><a href="cross.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-5"><a href="cross.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb5-6"><a href="cross.html#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bookdown)</span>
+<span id="cb5-7"><a href="cross.html#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="cross.html#cb5-8" aria-hidden="true" tabindex="-1"></a>DAP_ALL_RAW<span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;/Users/carolitalanders/Documents/Grad /DAP/DONT EDIT/DAP_2021_all_data.xlsx&quot;</span>)</span></code></pre></div>
+<pre><code>## New names:
+## • `` -&gt; `...30`
+## • `` -&gt; `...36`</code></pre>
 
 </div>
 </div>
@@ -227,8 +249,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="data-tidying-calculations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="statistical-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-pool-of-tears.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -259,7 +281,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/CarolitaE/DAP-2021/edit/master/03-race.Rmd",
+"link": "https://github.com/CarolitaE/DAP-2021/edit/master/02-Methods.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -267,7 +289,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/CarolitaE/DAP-2021/blob/main/03-race.Rmd",
+"link": "https://github.com/CarolitaE/DAP-2021/blob/main/02-Methods.Rmd",
 "text": null
 },
 "download": null,
