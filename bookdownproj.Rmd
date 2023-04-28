@@ -1,0 +1,352 @@
+---
+book_filename: "bookdownproj"
+output_dir: docs
+delete_merged_file: true
+edit: https://github.com/CarolitaE/DAP-2021/edit/master/%s
+view: https://github.com/CarolitaE/DAP-2021/blob/main/%s
+language:
+  ui:
+    chapter_name: "Chapter 1 "
+---
+
+## Welcome to the Dryland Agroecosystem bookdown for my master thesis.
+
+The Dryland Agroecosystems project was born in 1985 in collaboration with Colorado State University, the USDA-ARS and local Eastern Colorado dryland farmers. This long term experiment was set up in order to research how cropping intensity can improve the vulnerability of Great Plains dryland agroecosystems. The transition to no-till farming has allowed for more diverse and intensive cropping rotations that improve water use efficiency. No-till management along with increased cropping system intensity has shown gains in surface soil organic C (SOC). The plots are situated along an evapotranspiration gradient. and positioned on a gradient of slight slope positions all corresponding to a unique soil series of the area.
+
+My participation in this long term research experiment builds from the most recent sampling done in May and July of 2021. To explore previous findings even more, in 2021 all 3 sites (Sterling, Stratton and Walsh) were sampled down to 80 cm versus the 20 cm historically sampled. By sampling at a deeper depth we hope to answer questions: Does increased SOC as previously found, consist past 20 cm? How does the slope factor affect SOC dynamics? What treatments enhance deep soil carbon?
+
+Each chapter of this bookdown will contain the data, r code, visual plots and more related to 2021 sampling.
+
+Note: Inorganic carbon values are still being analyzed and will be incomplete in this data set
+
+### Experimental Design
+
+![DAP original sequence design](images/DAP%20sequence.png)
+
+#### 2021 Sampling Design
+
+-   3 sites where Sterling =1, Stratton =2 and Walsh =3
+
+-   3 slopes where summit slope =1, side slope =2, toe slope =3
+
+-   12 treatments
+
+-   2 reps
+
+-   6 depths (0-5cm,5-10cm,10-15cm,15-20cm,20-40cm,40-80cm)
+
+-   =1296 samples!
+
+<!--chapter:end:01-DAP_Introduction.Rmd-->
+
+--- 
+title: "DAP 2021"
+author: "Carolita Landers"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+---
+
+# Dryland Agroecosystems Project 
+
+## Welcome to the Dryland Agroecosystem bookdown for my master thesis.
+
+The Dryland Agroecosystems project was born in 1985 in collaboration with Colorado State University, the USDA-ARS and local Eastern Colorado dryland farmers. This long term experiment was set up in order to research how cropping intensity can improve the vulnerability of Great Plains dryland agroecosystems. The transition to no-till farming has allowed for more diverse and intensive cropping rotations that improve water use efficiency. No-till management along with increased cropping system intensity has shown gains in surface soil organic C (SOC). The plots are situated along an evapotranspiration gradient. and positioned on a gradient of slight slope positions all corresponding to a unique soil series of the area.
+
+My participation in this long term research experiment builds from the most recent sampling done in May and July of 2021. To explore previous findings even more, in 2021 all 3 sites (Sterling, Stratton and Walsh) were sampled down to 80 cm versus the 20 cm historically sampled. By sampling at a deeper depth we hope to answer questions: Does increased SOC as previously found, consist past 20 cm? How does the slope factor affect SOC dynamics? What treatments enhance deep soil carbon?
+
+Each chapter of this bookdown will contain the data, r code, visual plots and more related to 2021 sampling.
+
+Note: Inorganic carbon values are still being analyzed and will be incomplete in this data set
+
+### Experimental Design
+
+![DAP original sequence design](images/DAP%20sequence.png)
+
+#### 2021 Sampling Design
+
+-   3 sites where Sterling =1, Stratton =2 and Walsh =3
+
+-   3 slopes where summit slope =1, side slope =2, toe slope =3
+
+-   12 treatments
+
+-   2 reps
+
+-   6 depths (0-5cm,5-10cm,10-15cm,15-20cm,20-40cm,40-80cm)
+
+-   =1296 samples!
+
+<!--chapter:end:01-intro.Rmd-->
+
+---
+book_filename: "bookdownproj"
+output_dir: docs
+delete_merged_file: true
+edit: https://github.com/CarolitaE/DAP-2021/edit/master/%s
+view: https://github.com/CarolitaE/DAP-2021/blob/main/%s
+language:
+  ui:
+    chapter_name: "Chapter 2 "
+---
+
+# Raw Data & Methods 2021 {#cross}
+
+## Bulk Density
+
+Bulk density was sampled in field using standard 5cm bulk density rings for the 0-5cm and 5-10 cm depths. A madera soil sampling probe (Madera industrial Inc. Lincoln,NE) was used to measure the 10-20cm depths. The giddings probe volume was used to calculate BD for the 20-80cm depths.
+
+## Total Carbon and Nitrogen
+
+-   Total carbon (TC) and total Nitrogen (TN) were analyzed using LECO at the USDA ARS laboratory located in Fort Collins CO. Samples were loaded into ceramic boats with a specific samples mass, loaded into the LECO, and their % Carbon and % Nitrogen values are applied to the sample mass.
+-   Total C and N values have to then be applied to BD in order to get %Nitrogen T/ha. Using the following calculation
+    -   %N/g X BD X Depth X 100 (unit conversion factor)
+
+## Inorganic Carbon
+
+Inorganic carbon is analyzed using the pressure calcimeter method created by Sherrod et al. This methodology measure %Calcium carbonate that you can further calculate to get %inorganic Carbon
+
+%IC will be subtracted from %TC in order to get %OC
+
+## Load Raw Data
+
+```{r}
+library(tidyverse)
+library(plotly)
+library(ggplot2)
+library(ggplotgui)
+library(readxl)
+library(dplyr)
+library(tidyr)
+library(bookdown)
+
+DAP_ALL_RAW<- read_xlsx("/Users/carolitalanders/Documents/Grad /DAP/DONT EDIT/DAP_2021_all_data.xlsx")
+```
+
+<!--chapter:end:02-Methods.Rmd-->
+
+# The pool of tears
+
+
+<!--chapter:end:02-Raw_data.Rmd-->
+
+#Tidying and calcs
+
+###Tidying 
+
+```{r}
+DAP_tidy <- DAP_ALL_RAW %>%
+  rename(ID = `unique ID`,
+         BD = `Bulk Density g/cm^3`,
+         TC = `LECO carbon`,
+         TN = `LECO  Nitrogen`,
+         Depth = EndDepth) %>%
+  select(ID, SITE, SLOPE, STRIP, Rotation, Depth, BD,TN, TC) %>%
+  mutate(across(c(SITE, SLOPE, STRIP), as.numeric))
+
+```
+
+```{r}
+
+ 
+```
+
+###Data Calculations
+```{r}
+DAP_tidy$TNperha<-  with(DAP_tidy, TN * BD * Depth * 100)
+DAP_tidy$TCperha<- with(DAP_tidy, TC * BD * Depth *100)
+```
+
+#Visualizing 
+```{r}
+library(bookdown)
+library(tidyverse)
+library(plotly)
+library(ggplot2)
+library(ggplotgui)
+library(readxl)
+library(dplyr)
+library(tidyr)
+```
+
+### Plotting TN across all sites, slope and rotation
+
+```{r}
+graph_TN_all_sites<- ggplot(DAP_tidy, aes(x = Depth, y = TNperha, colour = SLOPE)) +
+  geom_point() +
+  facet_grid( . ~ Rotation ) +
+  labs(x = 'Depth (cm) ', y = 'TN tons/ha') +
+  ggtitle('TN across all sites ') +
+  theme_bw()
+graph_TN_all_sites
+```
+
+![](images/image-2005288338.png)
+
+### Plotting TC across all sites, slope and rotation
+
+```{r}
+graph_TC_all_sites<- ggplot(DAP_tidy, aes(x = Depth, y = TCperha, colour = SLOPE)) +
+  geom_point() +
+  facet_grid( . ~ Rotation ) +labs(x = 'Depth (cm) ', y = 'TC tons/ha') +
+  ggtitle('TC across all sites ') +
+  theme_bw()
+graph_TC_all_sites
+
+```
+
+![](images/image-586511912.png)
+
+
+<!--chapter:end:03-Data_organization.Rmd-->
+
+---
+book_filename: "bookdownproj"
+output_dir: docs
+delete_merged_file: true
+edit: https://github.com/CarolitaE/DAP-2021/edit/master/%s
+view: https://github.com/CarolitaE/DAP-2021/blob/main/%s
+language:
+  ui:
+    chapter_name: "Chapter 3 "
+---
+
+
+# Data tidying & Calculations 
+```{r}
+library(tidyverse)
+library(plotly)
+library(ggplot2)
+library(ggplotgui)
+library(readxl)
+library(dplyr)
+library(tidyr)
+library(bookdown)
+```
+
+##Tidying 
+```{r}
+DAP_tidy <- DAP_ALL_RAW %>%
+  rename(ID = `unique ID`,
+         BD = `Bulk Density g/cm^3`,
+         TC = `LECO carbon`,
+         TN = `LECO  Nitrogen`,
+         Depth = EndDepth) %>%
+  select(ID, SITE, SLOPE, STRIP, Rotation, Depth, BD,TN, TC) %>%
+  mutate(across(c(SITE, SLOPE, STRIP), as.numeric))
+
+```
+
+```{r}
+
+ 
+```
+
+##Data Calculations
+```{r}
+DAP_tidy$TNperha<-  with(DAP_tidy, TN * BD * Depth * 100)
+DAP_tidy$TCperha<- with(DAP_tidy, TC * BD * Depth *100)
+```
+
+
+<!--chapter:end:03-DataOrganization.Rmd-->
+
+---
+book_filename: "bookdownproj"
+output_dir: docs
+delete_merged_file: true
+edit: https://github.com/CarolitaE/DAP-2021/edit/master/%s
+view: https://github.com/CarolitaE/DAP-2021/blob/main/%s
+language:
+  ui:
+    chapter_name: "Chapter 4 "
+---
+
+#Data Visualization
+
+```{r}
+library(bookdown)
+library(tidyverse)
+library(plotly)
+library(ggplot2)
+library(ggplotgui)
+library(readxl)
+library(dplyr)
+library(tidyr)
+```
+
+## Plotting TN across all sites, slope and rotation
+
+```{r}
+graph_TN_all_sites<- ggplot(DAP_tidy, aes(x = Depth, y = TNperha, colour = SLOPE)) +
+  geom_point() +
+  facet_grid( . ~ Rotation ) +
+  labs(x = 'Depth (cm) ', y = 'TN tons/ha') +
+  ggtitle('TN across all sites ') +
+  theme_bw()
+graph_TN_all_sites
+```
+
+![](images/image-2005288338.png)
+
+## Plotting TC across all sites, slope and rotation
+
+```{r}
+graph_TC_all_sites<- ggplot(DAP_tidy, aes(x = Depth, y = TCperha, colour = SLOPE)) +
+  geom_point() +
+  facet_grid( . ~ Rotation ) +labs(x = 'Depth (cm) ', y = 'TC tons/ha') +
+  ggtitle('TC across all sites ') +
+  theme_bw()
+graph_TC_all_sites
+
+```
+
+![](images/image-586511912.png)
+
+<!--chapter:end:04-Visualization.Rmd-->
+
+---
+book_filename: "bookdownproj"
+output_dir: docs
+delete_merged_file: true
+edit: https://github.com/CarolitaE/DAP-2021/edit/master/%s
+view: https://github.com/CarolitaE/DAP-2021/blob/main/%s
+language:
+  ui:
+    chapter_name: "Chapter 5 "
+---
+
+# Statistical Analysis 
+## This capter will be dedicated to all stats and modeling
+
+## Publishing
+
+HTML books can be published online, see: https://bookdown.org/yihui/bookdown/publishing.html
+
+## 404 pages
+
+By default, users will be directed to a 404 page if they try to access a webpage that cannot be found. If you'd like to customize your 404 page instead of using the default, you may add either a `_404.Rmd` or `_404.md` file to your project root and use code and/or Markdown syntax.
+
+## Metadata for sharing
+
+Bookdown HTML books will provide HTML metadata for social sharing on platforms like Twitter, Facebook, and LinkedIn, using information you provide in the `index.Rmd` YAML. To setup, set the `url` for your book and the path to your `cover-image` file. Your book's `title` and `description` are also used.
+
+
+
+This `gitbook` uses the same social sharing data across all chapters in your book- all links shared will look the same.
+
+Specify your book's source repository on GitHub using the `edit` key under the configuration options in the `_output.yml` file, which allows users to suggest an edit by linking to a chapter's source file. 
+
+Read more about the features of this output format here:
+
+https://pkgs.rstudio.com/bookdown/reference/gitbook.html
+
+Or use:
+
+```{r eval=FALSE}
+?bookdown::gitbook
+```
+
+
+
+<!--chapter:end:05-Models.Rmd-->
+
