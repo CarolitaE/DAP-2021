@@ -1,13 +1,12 @@
 ---
-title: "Raw Data & Methods"
-author: "Carolita Landers"
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
-documentclass: book
-bibliography: [book.bib, packages.bib]
-biblio-style: apalike
-link-citations: yes
-github-repo: CarolitaE/DAP_bookdown-
+book_filename: "bookdownproj"
+output_dir: docs
+delete_merged_file: true
+edit: https://github.com/CarolitaE/DAP-2021/edit/master/%s
+view: https://github.com/CarolitaE/DAP-2021/blob/main/%s
+language:
+  ui:
+    chapter_name: "Chapter 2 "
 ---
 
 # Raw Data & Methods 2021 {#cross}

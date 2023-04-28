@@ -1,11 +1,12 @@
 ---
-title: "Data Visualization"
-author: "Carolita Landers"
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
-output: bookdown::gitbook
-documentclass: book
-description: "This is an example of using the bookdown package. The output format for this example is bookdown::gitbook."
+book_filename: "bookdownproj"
+output_dir: docs
+delete_merged_file: true
+edit: https://github.com/CarolitaE/DAP-2021/edit/master/%s
+view: https://github.com/CarolitaE/DAP-2021/blob/main/%s
+language:
+  ui:
+    chapter_name: "Chapter 4 "
 ---
 
 #Data Visualization
